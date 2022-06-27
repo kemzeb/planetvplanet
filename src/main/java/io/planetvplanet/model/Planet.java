@@ -1,13 +1,13 @@
 package io.planetvplanet.model;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "planet")
 public class Planet {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private long planetID;
+    private UUID planetID;
     private String planetName;
     private String hostName;
     private String discoveryYear;
@@ -16,13 +16,19 @@ public class Planet {
     private Float orbitalPeriodDays;
     private Float planetEarthMass;
     private Float planetEarthRadius;
-    private Float stellarEffectiveTempKelvin;
-    private Float stellarMass;
-    private Float systemDistancesInParsecs;
+    private boolean exoplanetFlag;
+    // TODO: Introduce additional tables to the database to avoid unnecessary redundancy.
+    private Float systemDistanceInParsecs;
+    private Integer systemNumStars;
+    private Integer systemNumPlanets;
 
-    public Planet(String planetName, String hostName, String discoveryYear, String discoveryFacility,
-                  String discoveryMethod, Float orbitalPeriodDays, Float planetEarthMass, Float planetEarthRadius,
-                  Float stellarEffectiveTempKelvin, Float stellarMass, Float systemDistancesInParsecs) {
+    public Planet() {}
+
+    public Planet(String planetName, String hostName, String discoveryYear,
+                  String discoveryFacility, String discoveryMethod, Float orbitalPeriodDays,
+                  Float planetEarthMass, Float planetEarthRadius, boolean exoplanetFlag,
+                  Float systemDistanceInParsecs, Integer systemNumStars, Integer systemNumPlanets) {
+        this.planetID = UUID.randomUUID();
         this.planetName = planetName;
         this.hostName = hostName;
         this.discoveryYear = discoveryYear;
@@ -31,18 +37,18 @@ public class Planet {
         this.orbitalPeriodDays = orbitalPeriodDays;
         this.planetEarthMass = planetEarthMass;
         this.planetEarthRadius = planetEarthRadius;
-        this.stellarEffectiveTempKelvin = stellarEffectiveTempKelvin;
-        this.stellarMass = stellarMass;
-        this.systemDistancesInParsecs = systemDistancesInParsecs;
+        this.exoplanetFlag = exoplanetFlag;
+        this.systemDistanceInParsecs = systemDistanceInParsecs;
+        this.systemNumStars = systemNumStars;
+        this.systemNumPlanets = systemNumPlanets;
     }
-
     @Override
     public String toString() {
         return String.format("Planet: %s, Host: %s, Discovery Year: %s",
                 this.planetName, this.hostName, this.discoveryYear);
     }
 
-    public long getPlanetID() {
+    public UUID getPlanetID() {
         return planetID;
     }
 
@@ -78,16 +84,20 @@ public class Planet {
         return planetEarthRadius;
     }
 
-    public Float getStellarEffectiveTempKelvin() {
-        return stellarEffectiveTempKelvin;
+    public Float getSystemDistanceInParsecs() {
+        return systemDistanceInParsecs;
     }
 
-    public Float getStellarMass() {
-        return stellarMass;
+    public Integer getSystemNumStars() {
+        return systemNumStars;
     }
 
-    public Float getSystemDistancesInParsecs() {
-        return systemDistancesInParsecs;
+    public Integer getSystemNumPlanets() {
+        return systemNumPlanets;
+    }
+
+    public boolean isExoplanetFlag() {
+        return exoplanetFlag;
     }
 
 

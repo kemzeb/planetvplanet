@@ -35,31 +35,22 @@ public class CSVToDB {
             String discoveryFacility = record.get("disc_facility");
             String discoveryMethod = record.get("discoverymethod");
 
-            Float orbitalPeriodDays = record.get("pl_orbper").isEmpty() ? null :
+            Float orbitalPeriodDays = record.get("pl_orbper").isBlank() ? null :
                     Float.parseFloat(record.get("pl_orbper"));
-            Float earthMass = record.get("pl_bmasse").isEmpty() ? null :
+            Float earthMass = record.get("pl_bmasse").isBlank() ? null :
                     Float.parseFloat(record.get("pl_bmasse"));
-            Float earthRadius = record.get("pl_rade").isEmpty() ? null :
+            Float earthRadius = record.get("pl_rade").isBlank() ? null :
                     Float.parseFloat(record.get("pl_rade"));
-            Float stellarTempKelvin = record.get("st_teff").isEmpty() ? null :
-                    Float.parseFloat(record.get("st_teff"));
-            Float stellarMass = record.get("st_mass").isEmpty() ? null :
-                    Float.parseFloat(record.get("st_mass"));
-            Float systemDistanceInParsecs = record.get("sy_dist").isEmpty() ? null :
+            Float systemDistanceInParsecs = record.get("sy_dist").isBlank() ? null :
                     Float.parseFloat(record.get("sy_dist"));
+            Integer numStars = record.get("sy_snum").isBlank() ? null :
+                    Integer.parseInt(record.get("sy_snum"));
+            Integer numPlanets = record.get("sy_pnum").isBlank() ? null :
+                    Integer.parseInt(record.get("sy_pnum"));
 
-            Planet planet = new Planet(
-                    planetName,
-                    hostName,
-                    discoveryYear,
-                    discoveryFacility,
-                    discoveryMethod,
-                    orbitalPeriodDays,
-                    earthMass,
-                    earthRadius,
-                    stellarTempKelvin,
-                    stellarMass,
-                    systemDistanceInParsecs);
+            Planet planet = new Planet(planetName, hostName, discoveryYear, discoveryFacility,
+                    discoveryMethod, orbitalPeriodDays, earthMass, earthRadius, true,
+                    systemDistanceInParsecs, numStars, numPlanets);
             repo.save(planet);
         }
     }
