@@ -4,9 +4,10 @@ import io.planetvplanet.model.Planet;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.Collection;
+import java.util.UUID;
 
 @Repository
-public interface PlanetRepository extends JpaRepository<Planet, Long> {
-    List<Planet> findByPlanetNameIgnoreCaseContaining(String planetName);
+public interface PlanetRepository extends JpaRepository<Planet, UUID> {
+    Collection<Planet> findByPlanetNameIgnoreCaseContaining(String input);
 }
