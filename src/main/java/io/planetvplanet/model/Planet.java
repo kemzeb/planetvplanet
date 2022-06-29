@@ -6,6 +6,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "planet")
 public class Planet {
+
     @Id
     private UUID planetID;
     private String planetName;
@@ -100,6 +101,11 @@ public class Planet {
         return exoplanetFlag;
     }
 
+    public void setPlanetName(String planetName) {
+        this.planetName = planetName;
+    }
 
-
+    public void setHostName(String hostName) {
+        this.hostName = hostName;
+    }
 }
