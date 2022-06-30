@@ -36,7 +36,7 @@ class SearchServiceTest {
         underTest.getPlanetsByNameSubstring(input, false);
 
         // Then
-        verify(planetRepository, never()).findByPlanetNameIgnoreCaseContaining(input);
+        verify(planetRepository, never()).findByPlanetNameIgnoreCaseContainingAndExoplanetFlag(input, false);
     }
 
     @Test
@@ -51,7 +51,7 @@ class SearchServiceTest {
         underTest.getPlanetsByNameSubstring(input, false);
 
         // Then
-        verify(planetRepository, never()).findByPlanetNameIgnoreCaseContaining(input);
+        verify(planetRepository, never()).findByPlanetNameIgnoreCaseContainingAndExoplanetFlag(input, false);
     }
 
     @Test
@@ -64,7 +64,7 @@ class SearchServiceTest {
 
         planet.setPlanetName(planetName);
         planet.setHostName(hostName);
-        when(planetRepository.findByPlanetNameIgnoreCaseContaining(input)).thenReturn(
+        when(planetRepository.findByPlanetNameIgnoreCaseContainingAndExoplanetFlag(input, false)).thenReturn(
                 new ArrayList<>(List.of(planet)));
 
         // When
@@ -72,7 +72,7 @@ class SearchServiceTest {
                 underTest.getPlanetsByNameSubstring(input, false);
 
         // Then
-        verify(planetRepository).findByPlanetNameIgnoreCaseContaining(input);
+        verify(planetRepository).findByPlanetNameIgnoreCaseContainingAndExoplanetFlag(input, false);
         assertThat(planetCollection).isNotNull();
 
         SearchPlanetResult result = planetCollection.iterator().next();
@@ -89,7 +89,7 @@ class SearchServiceTest {
         when(planetRepository.findById(id)).thenReturn(Optional.empty());
 
         // When
-        Optional<SearchPlanetResult> result = underTest.getPlanetByID(id);
+        Optional<Planet> result = underTest.getPlanet(id);
 
         // Then
         verify(planetRepository).findById(id);
@@ -104,7 +104,7 @@ class SearchServiceTest {
         when(planetRepository.findById(id)).thenReturn(Optional.of(planet));
 
         // When
-        Optional<SearchPlanetResult> result = underTest.getPlanetByID(id);
+        Optional<Planet> result = underTest.getPlanet(id);
 
         // Then
         verify(planetRepository).findById(id);

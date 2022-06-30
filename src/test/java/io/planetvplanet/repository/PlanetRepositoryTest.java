@@ -29,7 +29,7 @@ class PlanetRepositoryTest {
 
         // When
         Collection<Planet> planetCollection = underTest
-                .findByPlanetNameIgnoreCaseContaining(inputName);
+                .findByPlanetNameIgnoreCaseContainingAndExoplanetFlag(inputName, false);
 
         // Then
         assertThat(planetCollection).isNotNull().isEmpty();
@@ -45,7 +45,7 @@ class PlanetRepositoryTest {
 
         // When
         input = "nov"; // Should at least return the only element in the repo.
-        Collection<Planet> planetCollection = underTest.findByPlanetNameIgnoreCaseContaining(input);
+        Collection<Planet> planetCollection = underTest.findByPlanetNameIgnoreCaseContainingAndExoplanetFlag(input, false);
 
         // Then
         assertThat(planetCollection).isNotNull().hasSize(1);

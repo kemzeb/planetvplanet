@@ -1,6 +1,7 @@
 package io.planetvplanet.service;
 
 import io.planetvplanet.dto.SearchPlanetResult;
+import io.planetvplanet.model.Planet;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -16,5 +17,5 @@ public interface ISearchService {
      */
     Collection<SearchPlanetResult> getPlanetsByNameSubstring(String input, boolean exoplanetFlag);
 
-    Optional<SearchPlanetResult> getPlanetByID(UUID id);
+    Optional<Planet> getPlanet(UUID id);
 }

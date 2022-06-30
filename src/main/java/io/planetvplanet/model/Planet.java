@@ -1,6 +1,10 @@
 package io.planetvplanet.model;
 
-import javax.persistence.*;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.UUID;
 
 @Entity
@@ -8,6 +12,7 @@ import java.util.UUID;
 public class Planet {
 
     @Id
+    @Type(type="org.hibernate.type.UUIDCharType")
     private UUID planetID;
     private String planetName;
     private String hostName;

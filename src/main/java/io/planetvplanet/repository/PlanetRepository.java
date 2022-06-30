@@ -9,5 +9,5 @@ import java.util.UUID;
 
 @Repository
 public interface PlanetRepository extends JpaRepository<Planet, UUID> {
-    Collection<Planet> findByPlanetNameIgnoreCaseContaining(String input);
+    Collection<Planet> findByPlanetNameIgnoreCaseContainingAndExoplanetFlag(String input, boolean exoplanetFlag);
 }

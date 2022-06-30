@@ -27,7 +27,7 @@ public class SearchService implements ISearchService {
 
         if(input.length() >= 2) {
             // If any planets were found, create its corresponding DTO object.
-            for(Planet planet : planetRepository.findByPlanetNameIgnoreCaseContaining(input)) {
+            for(Planet planet : planetRepository.findByPlanetNameIgnoreCaseContainingAndExoplanetFlag(input, exoplanetFlag)) {
                 resultCollection.add(new SearchPlanetResult(planet.getPlanetID(),
                         planet.getPlanetName(), planet.getHostName()));
             }
@@ -37,16 +37,7 @@ public class SearchService implements ISearchService {
     }
 
     @Override
-    public Optional<SearchPlanetResult> getPlanetByID(UUID id) {
-        Optional<SearchPlanetResult> result = Optional.empty();
-        Optional<Planet> planet = planetRepository.findById(id);
-
-        if(planet.isPresent()) {
-            Planet foundPlanet = planet.get();
-            result = Optional.of(new SearchPlanetResult(foundPlanet.getPlanetID(),
-                    foundPlanet.getPlanetName(), foundPlanet.getHostName()));
-        }
-
-        return result;
+    public Optional<Planet> getPlanet(UUID id) {
+        return planetRepository.findById(id);
     }
 }
