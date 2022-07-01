@@ -36,11 +36,9 @@ public class SearchController {
     @GetMapping(value = "planet")
     public ResponseEntity<Planet> searchForPlanetByID(@RequestParam UUID id) {
         Optional<Planet> planetOptional = searchService.getPlanet(id);
-        System.out.println(id);
 
-        if(planetOptional.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok().body(planetOptional.get());
+        return planetOptional.isPresent() ?
+                ResponseEntity.ok().body(planetOptional.get()) :
+                ResponseEntity.ok().build();
     }
 }
