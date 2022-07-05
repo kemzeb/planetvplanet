@@ -1,0 +1,9 @@
+body {
+  font-family: Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+#page-wrap {
+  padding-left: 36px;
+  padding-right: 36px;
+}

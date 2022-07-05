@@ -1,0 +1,22 @@
+.site-header {
+    margin-bottom: 16px;
+    padding-top: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav {
+    display: flex;
+}
+
+.nav-item {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 32px;
+    font-size: 20px;
+}
+
+#logo {
+    margin: 0px 0px;
+    font-size: 40px;
+}
