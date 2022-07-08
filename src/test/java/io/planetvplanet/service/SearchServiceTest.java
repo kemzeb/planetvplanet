@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Pageable;
 
 import java.util.*;
 
@@ -36,7 +37,7 @@ class SearchServiceTest {
         underTest.getPlanetsByNameSubstring(input, false);
 
         // Then
-        verify(planetRepository, never()).findByPlanetNameIgnoreCaseContainingAndExoplanetFlag(input, false);
+        verify(planetRepository, never()).search(eq(input), eq(false), any());
     }
 
     @Test
@@ -51,7 +52,7 @@ class SearchServiceTest {
         underTest.getPlanetsByNameSubstring(input, false);
 
         // Then
-        verify(planetRepository, never()).findByPlanetNameIgnoreCaseContainingAndExoplanetFlag(input, false);
+        verify(planetRepository, never()).search(input, false, Pageable.unpaged());
     }
 
     @Test
@@ -64,7 +65,7 @@ class SearchServiceTest {
 
         planet.setPlanetName(planetName);
         planet.setHostName(hostName);
-        when(planetRepository.findByPlanetNameIgnoreCaseContainingAndExoplanetFlag(input, false)).thenReturn(
+        when(planetRepository.search(eq(input), eq(false), any())).thenReturn(
                 new ArrayList<>(List.of(planet)));
 
         // When
@@ -72,7 +73,7 @@ class SearchServiceTest {
                 underTest.getPlanetsByNameSubstring(input, false);
 
         // Then
-        verify(planetRepository).findByPlanetNameIgnoreCaseContainingAndExoplanetFlag(input, false);
+        verify(planetRepository).search(eq(input), eq(false), any());
         assertThat(planetCollection).isNotNull();
 
         SearchPlanetResult result = planetCollection.iterator().next();

@@ -5,6 +5,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.Collection;
 
@@ -29,7 +31,7 @@ class PlanetRepositoryTest {
 
         // When
         Collection<Planet> planetCollection = underTest
-                .findByPlanetNameIgnoreCaseContainingAndExoplanetFlag(inputName, false);
+                .search(inputName, false, Pageable.unpaged());
 
         // Then
         assertThat(planetCollection).isNotNull().isEmpty();
@@ -45,7 +47,7 @@ class PlanetRepositoryTest {
 
         // When
         input = "nov"; // Should at least return the only element in the repo.
-        Collection<Planet> planetCollection = underTest.findByPlanetNameIgnoreCaseContainingAndExoplanetFlag(input, false);
+        Collection<Planet> planetCollection = underTest.search(input, false, PageRequest.ofSize(1));
 
         // Then
         assertThat(planetCollection).isNotNull().hasSize(1);

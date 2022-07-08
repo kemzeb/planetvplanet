@@ -1,13 +1,20 @@
 package io.planetvplanet.repository;
 
 import io.planetvplanet.model.Planet;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 @Repository
 public interface PlanetRepository extends JpaRepository<Planet, UUID> {
-    Collection<Planet> findByPlanetNameIgnoreCaseContainingAndExoplanetFlag(String input, boolean exoplanetFlag);
+    @Query("SELECT p FROM Planet p WHERE UPPER(p.planetName) LIKE UPPER(CONCAT('%', :input, '%')) " +
+        "AND p.exoplanetFlag=:exoplanetFlag")
+    List<Planet> search(@Param("input") String input,
+                        @Param("exoplanetFlag") boolean exoplanetFlag,
+                        Pageable pageable);
 }

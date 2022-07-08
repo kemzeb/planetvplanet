@@ -4,6 +4,7 @@ import io.planetvplanet.dto.SearchPlanetResult;
 import io.planetvplanet.model.Planet;
 import io.planetvplanet.repository.PlanetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,15 +25,15 @@ public class SearchService implements ISearchService {
     @Override
     public Collection<SearchPlanetResult> getPlanetsByNameSubstring(String input, boolean exoplanetFlag) {
         Collection<SearchPlanetResult> resultCollection = new ArrayList<>();
+        int limitSize = 10;
 
         if(input.length() >= 2) {
             // If any planets were found, create its corresponding DTO object.
-            for(Planet planet : planetRepository.findByPlanetNameIgnoreCaseContainingAndExoplanetFlag(input, exoplanetFlag)) {
+            for(Planet planet : planetRepository.search(input, exoplanetFlag, PageRequest.ofSize(limitSize))) {
                 resultCollection.add(new SearchPlanetResult(planet.getPlanetID(),
                         planet.getPlanetName(), planet.getHostName()));
             }
         }
-
         return resultCollection;
     }
 
