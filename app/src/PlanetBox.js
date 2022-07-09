@@ -27,12 +27,15 @@ function PlanetBox({ considerExoplanets, searchResult, onSearchResultChange }) {
     const handleSearchSubmit = (event) => {
         event.preventDefault();
 
-        const stringQuery = event.target.query.value;
-        if (stringQuery.length < 1) {
+        const stringQueryUppercase = event.target.query.value.toUpperCase();
+        if (stringQueryUppercase.length < 1) {
             return;
         }
 
-        const searchSuggestion = newSearchSuggestions.find(suggestion => suggestion.planetName === stringQuery)
+        const searchSuggestion = newSearchSuggestions.find(suggestion => {
+            return suggestion.planetName.toUpperCase() === stringQueryUppercase
+        });
+
         if (searchSuggestion) {
             // Fetch the requested planet.
             fetch(URL + `/search/planet?id=${searchSuggestion.id}`)
