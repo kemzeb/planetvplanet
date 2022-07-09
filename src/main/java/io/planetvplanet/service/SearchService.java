@@ -4,13 +4,12 @@ import io.planetvplanet.dto.SearchPlanetResult;
 import io.planetvplanet.model.Planet;
 import io.planetvplanet.repository.PlanetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class SearchService implements ISearchService {
@@ -21,7 +20,6 @@ public class SearchService implements ISearchService {
         this.planetRepository = planetRepository;
     }
 
-    // FIXME: This maybe prone to an SQL injection attack. See if Spring JPA handles such attacks.
     @Override
     public Collection<SearchPlanetResult> getPlanetsByNameSubstring(String input, boolean exoplanetFlag) {
         Collection<SearchPlanetResult> resultCollection = new ArrayList<>();
@@ -40,5 +38,28 @@ public class SearchService implements ISearchService {
     @Override
     public Optional<Planet> getPlanet(UUID id) {
         return planetRepository.findById(id);
+    }
+
+    /**
+     * Grab a random Planet object from the data layer.
+     * @param exoplanetFlag: Determine whether to choose a random exoplanet or
+     *                     planet.
+     * @return A random Optional object with a value, otherwise an empty
+     * Optional.
+     */
+    @Override
+    public Optional<Planet> getRandomPlanet(boolean exoplanetFlag) {
+        long count = planetRepository.count();
+        int numPlanetsSolarSys = 8;
+        long totalPages = exoplanetFlag ? count - numPlanetsSolarSys : numPlanetsSolarSys;
+        // Note: This randomization approach does not fair well when reaching values > 2^31.
+        // I don't expect that we will find 2^31 exoplanets any time soon, but
+        // imagining that we do, we will be missing out on a large portion of
+        // the database if it scales to higher long values.
+        int randomPageIdx = (int) (Math.random() * totalPages);
+        Pageable pageable = PageRequest.of(randomPageIdx, 1);
+        Page<Planet> planetPage = planetRepository.findByExoplanetFlag(exoplanetFlag, pageable);
+
+        return planetPage.isEmpty() ? Optional.empty() : planetPage.get().findFirst();
     }
 }

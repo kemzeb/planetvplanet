@@ -39,4 +39,13 @@ public class SearchController {
                 ResponseEntity.ok().body(planetOptional.get()) :
                 ResponseEntity.ok().build();
     }
+
+    @GetMapping(value = "random")
+    public ResponseEntity<Planet> getRandomPlanet(@RequestParam("exo_flag") boolean exoplanetFlag) {
+        Optional<Planet> planetOptional = searchService.getRandomPlanet(exoplanetFlag);
+
+        return planetOptional.isPresent() ?
+                ResponseEntity.ok().body(planetOptional.get()) :
+                ResponseEntity.ok().build();
+    }
 }

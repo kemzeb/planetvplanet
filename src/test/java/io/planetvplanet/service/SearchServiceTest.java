@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 import java.util.*;
@@ -109,6 +111,34 @@ class SearchServiceTest {
 
         // Then
         verify(planetRepository).findById(id);
+        assertThat(result).isPresent();
+    }
+
+    @Test
+    void getRandomPlanet_givenEmptyRepo_returnEmptyOptional() {
+        // Given
+        when(planetRepository.findByExoplanetFlag(anyBoolean(), any())).thenReturn(Page.empty());
+
+        // When
+        Optional<Planet> result = underTest.getRandomPlanet(false);
+
+        // Then
+        verify(planetRepository).findByExoplanetFlag(eq(false), any());
+        assertThat(result).isEmpty();
+    }
+
+    @Test
+    void getRandomPlanet_givenNonEmptyRepo_returnNonEmptyOptional() {
+        // Given
+        Planet planet = new Planet();
+        when(planetRepository.findByExoplanetFlag(anyBoolean(), any()))
+                .thenReturn(new PageImpl<>(List.of(planet)));
+
+        // When
+        Optional<Planet> result = underTest.getRandomPlanet(false);
+
+        // Then
+        verify(planetRepository).findByExoplanetFlag(eq(false), any());
         assertThat(result).isPresent();
     }
 }

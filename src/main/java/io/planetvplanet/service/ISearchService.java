@@ -18,4 +18,6 @@ public interface ISearchService {
     Collection<SearchPlanetResult> getPlanetsByNameSubstring(String input, boolean exoplanetFlag);
 
     Optional<Planet> getPlanet(UUID id);
+
+    Optional<Planet> getRandomPlanet(boolean exoplanetFlag);
 }
