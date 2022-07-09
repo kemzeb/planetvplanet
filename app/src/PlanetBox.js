@@ -44,6 +44,30 @@ function PlanetBox({ considerExoplanets, searchResult, onSearchResultChange }) {
         }
     }
 
+    const handlePlanetInfoRender = () => {
+        if (!searchResult) {
+            return <div>Search for {listName}!</div>
+        } else {
+            const noDataStr = "n/a";
+
+            return (
+                <>
+                    <h3>Planet {searchResult.planetName || noDataStr}</h3>
+                    <h5>Host Star: {searchResult.hostName || noDataStr}</h5>
+                    <article># of Stars: {searchResult.systemNumStars || noDataStr}</article>
+                    <article># of Planets: {searchResult.systemNumPlanets || noDataStr}</article>
+                    <article>Discovery Year: {searchResult.discoveryYear || noDataStr}</article>
+                    <article>Discovery Method: {searchResult.discoveryMethod || noDataStr}</article>
+                    <article>Discovery Facility: {searchResult.discoveryFacility || noDataStr}</article>
+                    <article>Orbital Period Days: {searchResult.orbitalPeriodDays || noDataStr}</article>
+                    <article>Mass (Earth Mass): {searchResult.planetEarthMass || noDataStr}</article>
+                    <article>Radius (Earth Radius): {searchResult.planetEarthRadius || noDataStr}</article>
+                    {considerExoplanets === true && <article>System Distance (Parsecs): {searchResult.systemDistanceInParsecs || noDataStr}</article>}
+                </>
+            );
+        }
+    }
+
     return (
         <div id="planet-box">
             <div id="submission-content">
@@ -54,9 +78,12 @@ function PlanetBox({ considerExoplanets, searchResult, onSearchResultChange }) {
                     </datalist>
                     <input id="submit-button" type="submit" value="Submit"></input>
                 </form>
-                <form id="random-content">
-                    <input type="button" value="?"></input>
+                <form >
+                    <input type="button" value="Random"></input>
                 </form>
+            </div>
+            <div id="planet-info-content">
+                {handlePlanetInfoRender()}
             </div>
         </div>
     );

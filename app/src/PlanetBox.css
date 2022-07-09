@@ -1,8 +1,11 @@
+article {
+    font-size: 14px;
+}
+
 #planet-box {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 20px;
     flex-grow: 1;
-    margin-right: 8px;
 }
 
 #submission-content {
@@ -20,6 +23,10 @@
     margin: 0px 4px;
 }
 
-#random-content {
-    flex-basis: 10%;
+#planet-info-content {
+    padding: 16px;
+    display: block;
+    justify-content: center;
+    text-align: left;
+    max-width: 250px;
 }
