@@ -1,5 +1,6 @@
 import Header from './Header.js'
 import SiteInfo from './SiteInfo.js'
+import SearchGroupBox from './SearchGroupBox.js'
 import "./App.css"
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
     <div id="page-wrap">
       <Header />
       <SiteInfo />
+      <SearchGroupBox />
     </div>
   );
 }

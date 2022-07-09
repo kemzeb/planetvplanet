@@ -9,6 +9,8 @@ function SiteInfo(props) {
             </p>
             <p class="info-item" id="data">The exoplanet data that has been used was provided by the <a href="https://exoplanetarchive.ipac.caltech.edu/index.html"
                 target="_blank" rel="noreferrer">NASA Exoplanet Archive</a>.
+                Solar system data was referenced from <a href="https://nssdc.gsfc.nasa.gov/planetary/planetfact.html">
+                    NASA's Planetary Fact Sheets</a>.
             </p>
         </div>
     );
