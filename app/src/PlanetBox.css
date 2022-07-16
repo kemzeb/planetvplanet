@@ -2,28 +2,28 @@ article {
     font-size: 14px;
 }
 
-#planet-box {
+.planet-box {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 20px;
     flex-grow: 1;
 }
 
-#submission-content {
+.submission-content {
     display: flex;
     justify-content: center;
 }
 
-#search-container {
+.search-container {
     flex-basis: 75%;
     margin: 0px 0px;
 }
 
-#submit-button {
+.submit-button {
     flex-basis: 15%;
     margin: 0px 4px;
 }
 
-#planet-info-content {
+.planet-info-content {
     padding: 16px;
     display: block;
     justify-content: center;

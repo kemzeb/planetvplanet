@@ -1,6 +1,14 @@
 #comparison-box {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 20px;
-    flex-grow: 3;
+    flex-grow: 2;
     margin: 0px 8px;
+    flex-basis: auto;
+}
+
+#comparison-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: center;
 }

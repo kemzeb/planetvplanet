@@ -85,20 +85,20 @@ function PlanetBox({ considerExoplanets, searchResult, onSearchResultChange }) {
     }
 
     return (
-        <div id="planet-box">
-            <div id="submission-content">
+        <div className="planet-box">
+            <div className="submission-content">
                 <form onSubmit={handleSearchSubmit}>
-                    <input id="search-container" type="search" list={listName} onChange={event => handleSearchSuggestions(event)} name="query"></input>
+                    <input className="search-container" type="search" list={listName} onChange={event => handleSearchSuggestions(event)} name="query"></input>
                     <datalist id={listName}>
                         {newSearchSuggestions.map(planet => (<option key={planet.id}>{planet.planetName}</option>))}
                     </datalist>
-                    <input id="submit-button" type="submit" value="Submit"></input>
+                    <input className="submit-button" type="submit" value="Submit"></input>
                 </form>
                 <form onSubmit={handleRandomSubmit} >
                     <input type="submit" value="Random"></input>
                 </form>
             </div>
-            <div id="planet-info-content">
+            <div className="planet-info-content">
                 {handlePlanetInfoRender()}
             </div>
         </div>
