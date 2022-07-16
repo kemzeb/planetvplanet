@@ -95,7 +95,7 @@ function PlanetBox({ considerExoplanets, searchResult, onSearchResultChange }) {
                     <input className="submit-button" type="submit" value="Submit"></input>
                 </form>
                 <form onSubmit={handleRandomSubmit} >
-                    <input type="submit" value="Random"></input>
+                    <input className="submit-button" type="submit" value="Random"></input>
                 </form>
             </div>
             <div className="planet-info-content">

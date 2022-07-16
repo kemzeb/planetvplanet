@@ -4,6 +4,13 @@ body {
 }
 
 #page-wrap {
-  padding-left: 64px;
-  padding-right: 64px;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+@media (max-width: 400px) {
+  #page-wrap {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 }
