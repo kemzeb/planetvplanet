@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @CrossOrigin
 @RestController
-@RequestMapping(path = "search")
+@RequestMapping(path="planets")
 public class SearchController {
 
     private final ISearchService searchService;
@@ -25,14 +25,14 @@ public class SearchController {
 
     @GetMapping()
     public Collection<SearchPlanetResult> searchForPlanets(
-            @RequestParam String input,
-            @RequestParam("exo_flag") boolean exoplanetFlag) {
+            @RequestParam String name,
+            @RequestParam("exoplanet_flag") boolean exoplanetFlag) {
 
-        return searchService.getPlanetsByNameSubstring(input, exoplanetFlag);
+        return searchService.getPlanetsByNameSubstring(name, exoplanetFlag);
     }
 
-    @GetMapping(value = "planet")
-    public ResponseEntity<Planet> searchForPlanetByID(@RequestParam UUID id) {
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Planet> searchForPlanetByID(@PathVariable UUID id) {
         Optional<Planet> planetOptional = searchService.getPlanet(id);
 
         return planetOptional.isPresent() ?
@@ -40,8 +40,9 @@ public class SearchController {
                 ResponseEntity.ok().build();
     }
 
+    // TODO: If not given "exoplanet_flag", make the decision for the client using randomization.
     @GetMapping(value = "random")
-    public ResponseEntity<Planet> getRandomPlanet(@RequestParam("exo_flag") boolean exoplanetFlag) {
+    public ResponseEntity<Planet> getRandomPlanet(@RequestParam("exoplanet_flag") boolean exoplanetFlag) {
         Optional<Planet> planetOptional = searchService.getRandomPlanet(exoplanetFlag);
 
         return planetOptional.isPresent() ?
