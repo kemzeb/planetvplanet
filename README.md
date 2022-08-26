@@ -5,6 +5,12 @@ your web browser.
 
 ![Screenshot of web page](https://raw.githubusercontent.com/kemzeb/planetvplanet/main/docs/screenshots/screenshot.png)
 
+## Features
+* Searching for planets/exoplanets with  the aid of a search dropdown menu
+* Choosing a random planet/exoplanet
+* View data associated to a specific planet/exoplanet
+* View the similarities and differences between a planet and exoplanet
+
 ## Tech Stack
 ### Frontend
 * JavaScript
