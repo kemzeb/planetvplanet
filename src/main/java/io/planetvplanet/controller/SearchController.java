@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.Random;
 import java.util.UUID;
 
 @CrossOrigin
@@ -42,8 +43,19 @@ public class SearchController {
 
     // TODO: If not given "exoplanet_flag", make the decision for the client using randomization.
     @GetMapping(value = "random")
-    public ResponseEntity<Planet> getRandomPlanet(@RequestParam("exoplanet_flag") boolean exoplanetFlag) {
-        Optional<Planet> planetOptional = searchService.getRandomPlanet(exoplanetFlag);
+    public ResponseEntity<Planet> getRandomPlanet(@RequestParam("exoplanet_flag") Optional<Boolean> exoplanetFlag) {
+        boolean flag = false;
+
+        // If exoPlanetFlag is empty, we must determine whether we should
+        // choose a planet or exoplanet. Since we are choosing at random,
+        // lets randomize this choice as well.
+        if(exoplanetFlag.isPresent()) {
+            flag = exoplanetFlag.get();
+        } else {
+            int boolValue = new Random().nextInt() % 2;
+            flag = boolValue == 1 ? true : false;
+        }
+        Optional<Planet> planetOptional = searchService.getRandomPlanet(flag);
 
         return planetOptional.isPresent() ?
                 ResponseEntity.ok().body(planetOptional.get()) :
