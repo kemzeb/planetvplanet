@@ -41,7 +41,6 @@ public class SearchController {
                 ResponseEntity.ok().build();
     }
 
-    // TODO: If not given "exoplanet_flag", make the decision for the client using randomization.
     @GetMapping(value = "random")
     public ResponseEntity<Planet> getRandomPlanet(@RequestParam("exoplanet_flag") Optional<Boolean> exoplanetFlag) {
         boolean flag = false;
