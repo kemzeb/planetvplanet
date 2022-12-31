@@ -7,7 +7,7 @@ import "./PlanetBox.css"
 function PlanetBox({ considerExoplanets, searchResult, onSearchResultChange }) {
     let [newSearchSuggestions, setNewSearchSuggestions] = useState([])
 
-    const exoplanetFlag = considerExoplanets ? 1 : 0;
+    const isExoplanet = considerExoplanets ? 1 : 0;
     const listName = considerExoplanets ? "exoplanets" : "planets";
 
     const handleSearchResultChange = useCallback(newResult => {
@@ -17,7 +17,7 @@ function PlanetBox({ considerExoplanets, searchResult, onSearchResultChange }) {
     const handleSearchSuggestions = (event) => {
         const searchStr = event.target.value;
         if (searchStr.length > 1) {
-            fetch(URL + `/planets?name=${searchStr}&exoplanet_flag=${exoplanetFlag}`)
+            fetch(URL + `/planets?name=${searchStr}&is_exoplanet=${isExoplanet}`)
                 .then(response => response.json())
                 .then(data => setNewSearchSuggestions(data))
                 .catch(error => console.log(error))
@@ -54,7 +54,7 @@ function PlanetBox({ considerExoplanets, searchResult, onSearchResultChange }) {
 
         // Fetch a random planet from the backend and set it as the
         // new search result.
-        fetch(URL + `/planets/random?exoplanet_flag=${exoplanetFlag}`)
+        fetch(URL + `/planets/random?exoplanet_flag=${isExoplanet}`)
             .then(response => response.json())
             .then(data => handleSearchResultChange(data))
             .catch(error => console.log(error))

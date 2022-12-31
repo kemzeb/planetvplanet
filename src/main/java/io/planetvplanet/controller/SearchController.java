@@ -18,6 +18,7 @@ import java.util.UUID;
 public class SearchController {
 
     private final ISearchService searchService;
+    private final String isExoplanetQueryName = "is_exoplanet";
 
     @Autowired
     public SearchController(ISearchService searchService) {
@@ -27,7 +28,7 @@ public class SearchController {
     @GetMapping()
     public Collection<SearchPlanetResult> searchForPlanets(
             @RequestParam String name,
-            @RequestParam("exoplanet_flag") boolean exoplanetFlag) {
+            @RequestParam(isExoplanetQueryName) boolean exoplanetFlag) {
 
         return searchService.getPlanetsByNameSubstring(name, exoplanetFlag);
     }
@@ -42,14 +43,14 @@ public class SearchController {
     }
 
     @GetMapping(value = "random")
-    public ResponseEntity<Planet> getRandomPlanet(@RequestParam("exoplanet_flag") Optional<Boolean> exoplanetFlag) {
+    public ResponseEntity<Planet> getRandomPlanet(@RequestParam(isExoplanetQueryName) Optional<Boolean> isExoplanet) {
         boolean flag = false;
 
         // If exoPlanetFlag is empty, we must determine whether we should
         // choose a planet or exoplanet. Since we are choosing at random,
         // lets randomize this choice as well.
-        if(exoplanetFlag.isPresent()) {
-            flag = exoplanetFlag.get();
+        if(isExoplanet.isPresent()) {
+            flag = isExoplanet.get();
         } else {
             int boolValue = new Random().nextInt() % 2;
             flag = boolValue == 1 ? true : false;
