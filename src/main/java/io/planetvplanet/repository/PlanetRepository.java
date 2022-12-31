@@ -15,13 +15,13 @@ import java.util.UUID;
 public interface PlanetRepository extends JpaRepository<Planet, UUID> {
     // FIXME: This maybe prone to an SQL injection attack. See if Spring JPA handles such attacks.
     @Query("SELECT p FROM Planet p WHERE UPPER(p.planetName) LIKE UPPER(CONCAT('%', :input, '%')) " +
-        "AND p.exoplanetFlag=:exoplanetFlag")
+        "AND p.isExoplanet=:isExoplanet")
     List<Planet> search(@Param("input") String input,
-                        @Param("exoplanetFlag") boolean exoplanetFlag,
+                        @Param("isExoplanet") boolean isExoplanet,
                         Pageable pageable);
 
     /**
      * Method attended to be used to find a random row in the planet records.
      */
-    Page<Planet> findByExoplanetFlag(boolean exoplanetFlag, Pageable pageable);
+    Page<Planet> findByIsExoplanet(boolean isExoplanet, Pageable pageable);
 }

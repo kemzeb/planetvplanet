@@ -117,13 +117,13 @@ class SearchServiceTest {
     @Test
     void getRandomPlanet_givenEmptyRepo_returnEmptyOptional() {
         // Given
-        when(planetRepository.findByExoplanetFlag(anyBoolean(), any())).thenReturn(Page.empty());
+        when(planetRepository.findByIsExoplanet(anyBoolean(), any())).thenReturn(Page.empty());
 
         // When
         Optional<Planet> result = underTest.getRandomPlanet(false);
 
         // Then
-        verify(planetRepository).findByExoplanetFlag(eq(false), any());
+        verify(planetRepository).findByIsExoplanet(eq(false), any());
         assertThat(result).isEmpty();
     }
 
@@ -131,14 +131,14 @@ class SearchServiceTest {
     void getRandomPlanet_givenNonEmptyRepo_returnNonEmptyOptional() {
         // Given
         Planet planet = new Planet();
-        when(planetRepository.findByExoplanetFlag(anyBoolean(), any()))
+        when(planetRepository.findByIsExoplanet(anyBoolean(), any()))
                 .thenReturn(new PageImpl<>(List.of(planet)));
 
         // When
         Optional<Planet> result = underTest.getRandomPlanet(false);
 
         // Then
-        verify(planetRepository).findByExoplanetFlag(eq(false), any());
+        verify(planetRepository).findByIsExoplanet(eq(false), any());
         assertThat(result).isPresent();
     }
 }

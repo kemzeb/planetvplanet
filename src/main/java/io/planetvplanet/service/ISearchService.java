@@ -12,12 +12,12 @@ import java.util.UUID;
 public interface ISearchService {
     /**
      * @param input: String or substring possibly representing a planet name.
-     * @param exoplanetFlag: Search for exoplanets or planets of our Solar System.
+     * @param isExoplanet: Search for exoplanets or planets of our Solar System.
      * @return Collection of SearchPlanetResult objects representing matching planet names.
      */
-    Collection<SearchPlanetResult> getPlanetsByNameSubstring(String input, boolean exoplanetFlag);
+    Collection<SearchPlanetResult> getPlanetsByNameSubstring(String input, boolean isExoplanet);
 
     Optional<Planet> getPlanet(UUID id);
 
-    Optional<Planet> getRandomPlanet(boolean exoplanetFlag);
+    Optional<Planet> getRandomPlanet(boolean isExoplanet);
 }

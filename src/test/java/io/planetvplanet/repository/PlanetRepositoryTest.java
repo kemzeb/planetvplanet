@@ -58,7 +58,7 @@ class PlanetRepositoryTest {
     void findByExoplanetFlag_onEmptyRepository_returnsEmptyPage() {
         // When
         Page<Planet> planetPage = underTest
-                .findByExoplanetFlag(false, Pageable.unpaged());
+                .findByIsExoplanet(false, Pageable.unpaged());
 
         // Then
         assertThat(planetPage).isEmpty();
@@ -76,7 +76,7 @@ class PlanetRepositoryTest {
 
         // When
         Page<Planet> planetPage = underTest
-                .findByExoplanetFlag(false, PageRequest.of(invalidPageIdx, pageSize));
+                .findByIsExoplanet(false, PageRequest.of(invalidPageIdx, pageSize));
 
         // Then
         assertThat(planetPage).isEmpty();

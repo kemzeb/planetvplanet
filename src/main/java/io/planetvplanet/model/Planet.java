@@ -20,7 +20,7 @@ public class Planet {
     private Float orbitalPeriodDays;
     private Float planetEarthMass;
     private Float planetEarthRadius;
-    private boolean exoplanetFlag;
+    private boolean isExoplanet;
     // TODO: Introduce additional tables to the database to avoid unnecessary redundancy.
     private Float systemDistanceInParsecs;
     private Integer systemNumStars;
@@ -30,7 +30,7 @@ public class Planet {
 
     public Planet(String planetName, String hostName, String discoveryYear,
                   String discoveryFacility, String discoveryMethod, Float orbitalPeriodDays,
-                  Float planetEarthMass, Float planetEarthRadius, boolean exoplanetFlag,
+                  Float planetEarthMass, Float planetEarthRadius, boolean isExoplanet,
                   Float systemDistanceInParsecs, Integer systemNumStars, Integer systemNumPlanets) {
         this.planetID = UUID.randomUUID();
         this.planetName = planetName;
@@ -41,7 +41,7 @@ public class Planet {
         this.orbitalPeriodDays = orbitalPeriodDays;
         this.planetEarthMass = planetEarthMass;
         this.planetEarthRadius = planetEarthRadius;
-        this.exoplanetFlag = exoplanetFlag;
+        this.isExoplanet = isExoplanet;
         this.systemDistanceInParsecs = systemDistanceInParsecs;
         this.systemNumStars = systemNumStars;
         this.systemNumPlanets = systemNumPlanets;
@@ -100,8 +100,8 @@ public class Planet {
         return systemNumPlanets;
     }
 
-    public boolean isExoplanetFlag() {
-        return exoplanetFlag;
+    public boolean isExoplanet() {
+        return isExoplanet;
     }
 
     public void setPlanetName(String planetName) {
