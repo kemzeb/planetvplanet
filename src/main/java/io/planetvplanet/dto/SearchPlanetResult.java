@@ -8,25 +8,25 @@ import java.util.UUID;
  * exposed information used within a response message.
  */
 public class SearchPlanetResult {
-    private UUID id;
-    private String planetName;
-    private String hostName;
+  private UUID id;
+  private String planetName;
+  private String hostName;
 
-    public SearchPlanetResult(UUID id, String planetName, String hostName) {
-        this.id = id;
-        this.planetName = planetName;
-        this.hostName = hostName;
-    }
+  public SearchPlanetResult(UUID id, String planetName, String hostName) {
+    this.id = id;
+    this.planetName = planetName;
+    this.hostName = hostName;
+  }
 
-    public UUID getId() {
-        return id;
-    }
+  public UUID getId() {
+    return id;
+  }
 
-    public String getPlanetName() {
-        return planetName;
-    }
+  public String getPlanetName() {
+    return planetName;
+  }
 
-    public String getHostName() {
-        return hostName;
-    }
+  public String getHostName() {
+    return hostName;
+  }
 }

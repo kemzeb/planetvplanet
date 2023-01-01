@@ -13,11 +13,9 @@ import org.springframework.stereotype.Component;
 @SpringBootApplication
 @EnableJpaRepositories
 public class Application {
-
-	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
-	}
-
+  public static void main(String[] args) {
+    SpringApplication.run(Application.class, args);
+  }
 }
 
 /**
@@ -27,153 +25,68 @@ public class Application {
  */
 @Component
 class DBCommandLineRunner implements CommandLineRunner {
+  @Autowired private PlanetRepository planetRepo;
 
-	@Autowired
-	private PlanetRepository planetRepo;
+  @Override
+  public void run(String... args) throws Exception {
+    // Make sure that we have not already added records to the repository.
+    if (planetRepo.count() == 0) {
+      CSVToDB.convert(planetRepo, "src/main/resources/exoplanets.csv");
+      saveSolarSystemPlanetsToDB(planetRepo);
+    }
+  }
 
-	@Override
-	public void run(String... args) throws Exception {
-		// Make sure that we have not already added records to the repository.
-		if(planetRepo.count() == 0) {
-			CSVToDB.convert(planetRepo, "src/main/resources/exoplanets.csv");
-			saveSolarSystemPlanetsToDB(planetRepo);
-		}
-	}
+  /**
+   * Adds records into a database pertaining to planets in the Solar System.
+   * Data values referenced from
+   * <a href="https://nssdc.gsfc.nasa.gov/planetary/planetfact.html">
+   * Nasa Planetary Fact Sheets
+   * </a>. This method will be moved from this class in the future.
+   */
+  private void saveSolarSystemPlanetsToDB(PlanetRepository planetRepo) {
+    // 10^24 kilogram to Earth mass (since the fact sheet measures planetary
+    // mass in (10^24 kilograms).
+    final float E24KILOGRAM_TO_EARTH_MASS = 1.673360107095E-1f;
+    final float KILOMETER_TO_EARTH_RADIUS = 1.56785e-4f;
 
-	/**
-	 * Adds records into a database pertaining to planets in the Solar System.
-	 * Data values referenced from
-	 * <a href="https://nssdc.gsfc.nasa.gov/planetary/planetfact.html">
-	 * Nasa Planetary Fact Sheets
-	 * </a>. This method will be moved from this class in the future.
-	 */
-	private void saveSolarSystemPlanetsToDB(PlanetRepository planetRepo) {
-		// 10^24 kilogram to Earth mass (since the fact sheet measures planetary
-		// mass in (10^24 kilograms).
-		final float E24KILOGRAM_TO_EARTH_MASS = 1.673360107095E-1f;
-		final float KILOMETER_TO_EARTH_RADIUS = 1.56785e-4f;
+    // NOTE: I use "sidereal orbit period" as the orbital period.
+    // NOTE: I use "equatorial radius" as the planetary radius.
 
-		// NOTE: I use "sidereal orbit period" as the orbital period.
-		// NOTE: I use "equatorial radius" as the planetary radius.
+    Planet planet = new Planet("Mercury", "Sun", "Prehistoric", null, null, 87.969f,
+        0.33010f * E24KILOGRAM_TO_EARTH_MASS, 2440.5f * KILOMETER_TO_EARTH_RADIUS, false, null, 1,
+        8);
+    planetRepo.save(planet);
 
-		Planet planet = new Planet(
-				"Mercury",
-				"Sun",
-				"Prehistoric",
-				null,
-				null,
-				87.969f,
-				0.33010f * E24KILOGRAM_TO_EARTH_MASS,
-				2440.5f * KILOMETER_TO_EARTH_RADIUS,
-				false,
-				null,
-				1,
-				8);
-		planetRepo.save(planet);
+    planet = new Planet("Venus", "Sun", "Prehistoric", null, null, 224.701f,
+        4.8673f * E24KILOGRAM_TO_EARTH_MASS, 6051.8f * KILOMETER_TO_EARTH_RADIUS, false, null, 1,
+        8);
+    planetRepo.save(planet);
 
-		planet = new Planet(
-				"Venus",
-				"Sun",
-				"Prehistoric",
-				null,
-				null,
-				224.701f,
-				4.8673f * E24KILOGRAM_TO_EARTH_MASS,
-				6051.8f * KILOMETER_TO_EARTH_RADIUS,
-				false,
-				null,
-				1,
-				8);
-		planetRepo.save(planet);
+    planet =
+        new Planet("Earth", "Sun", "n/a", null, "n/a", 365.256f, 1.0f, 1.0f, false, null, 1, 8);
+    planetRepo.save(planet);
 
-		planet = new Planet(
-				"Earth",
-				"Sun",
-				"n/a",
-				null,
-				"n/a",
-				365.256f,
-				1.0f,
-				1.0f,
-				false,
-				null,
-				1,
-				8);
-		planetRepo.save(planet);
+    planet = new Planet("Mars", "Sun", "Prehistoric", null, null, 686.980f,
+        0.64169f * E24KILOGRAM_TO_EARTH_MASS, 3396.2f * KILOMETER_TO_EARTH_RADIUS, false, null, 1,
+        8);
+    planetRepo.save(planet);
 
-		planet = new Planet(
-				"Mars",
-				"Sun",
-				"Prehistoric",
-				null,
-				null,
-				686.980f,
-				0.64169f * E24KILOGRAM_TO_EARTH_MASS,
-				3396.2f * KILOMETER_TO_EARTH_RADIUS,
-				false,
-				null,
-				1,
-				8);
-		planetRepo.save(planet);
+    planet = new Planet("Jupiter", "Sun", "Prehistoric", null, null, 4332.589f,
+        1898.13f * E24KILOGRAM_TO_EARTH_MASS, 71492f * KILOMETER_TO_EARTH_RADIUS, false, null, 1,
+        8);
+    planetRepo.save(planet);
 
-		planet = new Planet(
-				"Jupiter",
-				"Sun",
-				"Prehistoric",
-				null,
-				null,
-				4332.589f,
-				1898.13f * E24KILOGRAM_TO_EARTH_MASS,
-				71492f * KILOMETER_TO_EARTH_RADIUS,
-				false,
-				null,
-				1,
-				8);
-		planetRepo.save(planet);
+    planet = new Planet("Saturn", "Sun", "Prehistoric", null, null, 10759.22f,
+        568.32f * E24KILOGRAM_TO_EARTH_MASS, 60268f * KILOMETER_TO_EARTH_RADIUS, false, null, 1, 8);
+    planetRepo.save(planet);
 
-		planet = new Planet(
-				"Saturn",
-				"Sun",
-				"Prehistoric",
-				null,
-				null,
-				10759.22f,
-				568.32f * E24KILOGRAM_TO_EARTH_MASS,
-				60268f * KILOMETER_TO_EARTH_RADIUS,
-				false,
-				null,
-				1,
-				8);
-		planetRepo.save(planet);
+    planet = new Planet("Uranus", "Sun", "Prehistoric", null, null, 30685.4f,
+        86.811f * E24KILOGRAM_TO_EARTH_MASS, 25559f * KILOMETER_TO_EARTH_RADIUS, false, null, 1, 8);
+    planetRepo.save(planet);
 
-		planet = new Planet(
-				"Uranus",
-				"Sun",
-				"Prehistoric",
-				null,
-				null,
-				30685.4f,
-				86.811f * E24KILOGRAM_TO_EARTH_MASS,
-				25559f * KILOMETER_TO_EARTH_RADIUS,
-				false,
-				null,
-				1,
-				8);
-		planetRepo.save(planet);
-
-		planet = new Planet(
-				"Neptune",
-				"Sun",
-				"Prehistoric",
-				null,
-				null,
-				60189f,
-				102.409f * E24KILOGRAM_TO_EARTH_MASS,
-				24764f * KILOMETER_TO_EARTH_RADIUS,
-				false,
-				null,
-				1,
-				8);
-		planetRepo.save(planet);
-	}
+    planet = new Planet("Neptune", "Sun", "Prehistoric", null, null, 60189f,
+        102.409f * E24KILOGRAM_TO_EARTH_MASS, 24764f * KILOMETER_TO_EARTH_RADIUS, false, null, 1,
+        8);
+    planetRepo.save(planet);
+  }
 }
