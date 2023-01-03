@@ -2,16 +2,16 @@
     background-color: var(--default-color-text);
     flex-shrink: 0;
     flex-basis: 30%;
-    padding: 16px 32px 16px 32px;
+    padding: 0px 32px 16px 32px;
 }
 
 .search-submission {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     gap: 8px;
     margin-top: 16px;
-    margin-bottom: 32px;
+    margin-bottom: 16px;
 }
 
 .search-submission>form {
@@ -29,4 +29,10 @@
     background: darkgray;
     border: none;
     cursor: pointer;
+}
+
+@media screen and (max-width: 1200px) {
+    .search-submission {
+        justify-content: center;
+    }
 }

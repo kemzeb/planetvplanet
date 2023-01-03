@@ -4,7 +4,6 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: stretch;
-    flex-wrap: wrap;
     border-style: solid;
     border-color: var(--default-color-border);
     border-width: 0px 0px 2px 0px;
@@ -48,4 +47,21 @@ header {
 
 .header-nav-link:hover {
     text-decoration: underline;
+}
+
+@media screen and (max-width: 835px) {
+    header {
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: stretch;
+    }
+
+    .header-title {
+        border-width: 0px 1px 1px 1px;
+    }
+
+    .header-nav {
+        border-width: 0px;
+    }
 }
