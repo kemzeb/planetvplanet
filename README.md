@@ -3,7 +3,7 @@
 Compare Solar System planets with exoplanets from the great beyond... all in
 your web browser.
 
-![Screenshot of web page](https://raw.githubusercontent.com/kemzeb/planetvplanet/main/docs/screenshots/screenshot.png)
+![Screenshot of web page](https://raw.githubusercontent.com/kemzeb/planetvplanet/main/docs/screenshots/14f52c02f150b476069a34333d662140455fb379.png)
 
 ## Features
 * Searching for planets/exoplanets with  the aid of a search dropdown menu
