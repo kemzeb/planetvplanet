@@ -1,14 +1,13 @@
 import React, { useCallback, useState } from "react";
-import { URL } from "./const.js"
+import { URL } from "../const.js"
 import "./PlanetBox.css"
 
-// TODO: A lot of the logic in this component should be in their own component.
 
-function PlanetBox({ considerExoplanets, searchResult, onSearchResultChange }) {
+function PlanetBox({ isExoplanetComponent, searchResult, onSearchResultChange }) {
     let [newSearchSuggestions, setNewSearchSuggestions] = useState([])
 
-    const isExoplanet = considerExoplanets ? 1 : 0;
-    const listName = considerExoplanets ? "exoplanets" : "planets";
+    const isExoplanet = isExoplanetComponent ? 1 : 0;
+    const listName = isExoplanetComponent ? "exoplanets" : "planets";
 
     const handleSearchResultChange = useCallback(newResult => {
         onSearchResultChange(newResult)
@@ -60,7 +59,7 @@ function PlanetBox({ considerExoplanets, searchResult, onSearchResultChange }) {
             .catch(error => console.log(error))
     }
 
-    const handlePlanetInfoRender = () => {
+    const createPlanetInfo = () => {
         if (!searchResult) {
             return <div>Search for {listName}!</div>
         } else {
@@ -68,17 +67,17 @@ function PlanetBox({ considerExoplanets, searchResult, onSearchResultChange }) {
 
             return (
                 <>
-                    <h3>Planet {searchResult.planetName || noDataStr}</h3>
-                    <h5>Host Star: {searchResult.hostName || noDataStr}</h5>
-                    <article># of Stars: {searchResult.systemNumStars || noDataStr}</article>
-                    <article># of Planets: {searchResult.systemNumPlanets || noDataStr}</article>
+                    <h3>Planet {searchResult.planetName}</h3>
+                    <h5>Host Star: {searchResult.hostName}</h5>
+                    <article># of Stars: {searchResult.systemNumStars}</article>
+                    <article># of Planets: {searchResult.systemNumPlanets}</article>
                     <article>Discovery Year: {searchResult.discoveryYear || noDataStr}</article>
                     <article>Discovery Method: {searchResult.discoveryMethod || noDataStr}</article>
                     <article>Discovery Facility: {searchResult.discoveryFacility || noDataStr}</article>
                     <article>Orbital Period Days: {searchResult.orbitalPeriodDays || noDataStr}</article>
                     <article>Mass (Earth Mass): {searchResult.planetEarthMass || noDataStr}</article>
                     <article>Radius (Earth Radius): {searchResult.planetEarthRadius || noDataStr}</article>
-                    {considerExoplanets === true && <article>System Distance (Parsecs): {searchResult.systemDistanceInParsecs || noDataStr}</article>}
+                    {isExoplanetComponent === true && <article>System Distance (Parsecs): {searchResult.systemDistanceInParsecs || noDataStr}</article>}
                 </>
             );
         }
@@ -86,9 +85,9 @@ function PlanetBox({ considerExoplanets, searchResult, onSearchResultChange }) {
 
     return (
         <div className="planet-box">
-            <div className="submission-content">
+            <div className="search-submission">
                 <form onSubmit={handleSearchSubmit}>
-                    <input className="search-container" type="search" list={listName} onChange={event => handleSearchSuggestions(event)} name="query"></input>
+                    <input className="search-box" type="search" list={listName} onChange={event => handleSearchSuggestions(event)} name="query"></input>
                     <datalist id={listName}>
                         {newSearchSuggestions.map(planet => (<option key={planet.id}>{planet.planetName}</option>))}
                     </datalist>
@@ -99,7 +98,7 @@ function PlanetBox({ considerExoplanets, searchResult, onSearchResultChange }) {
                 </form>
             </div>
             <div className="planet-info-content">
-                {handlePlanetInfoRender()}
+                {createPlanetInfo()}
             </div>
         </div>
     );

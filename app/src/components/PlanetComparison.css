@@ -1,0 +1,9 @@
+.planet-comparison-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 16px;
+    color: black;
+    margin-top: 16px;
+    height: 600px;
+}
