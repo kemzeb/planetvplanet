@@ -53,7 +53,7 @@ function PlanetBox({ isExoplanetComponent, searchResult, onSearchResultChange })
 
         // Fetch a random planet from the backend and set it as the
         // new search result.
-        fetch(URL + `/planets/random?exoplanet_flag=${isExoplanet}`)
+        fetch(URL + `/planets/random?is_exoplanet=${isExoplanet}`)
             .then(response => response.json())
             .then(data => handleSearchResultChange(data))
             .catch(error => console.log(error))
