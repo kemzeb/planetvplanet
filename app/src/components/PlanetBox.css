@@ -1,0 +1,38 @@
+.planet-box {
+    background-color: var(--default-color-text);
+    flex-shrink: 0;
+    flex-basis: 30%;
+    padding: 0px 32px 16px 32px;
+}
+
+.search-submission {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.search-submission>form {
+    display: inline-flex;
+}
+
+.search-box {
+    font-size: 16px;
+    padding: 6px;
+}
+
+.submit-button {
+    font-weight: 700;
+    padding: 10px;
+    background: darkgray;
+    border: none;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1200px) {
+    .search-submission {
+        justify-content: center;
+    }
+}

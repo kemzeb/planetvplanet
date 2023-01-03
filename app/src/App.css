@@ -1,16 +1,11 @@
+:root {
+  --default-color-text: rgba(255, 255, 255, 0.85);
+  --default-color-border: rgba(255, 255, 255, 0.15);
+}
+
 body {
-  font-family: Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-#page-wrap {
-  padding-left: 32px;
-  padding-right: 32px;
-}
-
-@media (max-width: 400px) {
-  #page-wrap {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
+  background-color: black;
+  color: var(--default-color-text);
+  font-family: Monaco, Consolas, 'Courier New', monospace;
+  margin: 0px;
 }

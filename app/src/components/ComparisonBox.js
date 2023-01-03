@@ -76,7 +76,7 @@ function ComparisonBox({ planetResult, exoplanetResult }) {
     }
 
     return (
-        <div id="comparison-box">
+        <div className="comparison-box">
             {performComparison()}
         </div>
     );

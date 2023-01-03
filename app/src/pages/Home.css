@@ -1,0 +1,19 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.home-subtitle {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+    width: 512px;
+    margin-top: 16px;
+}
+
+.home-caption {
+    margin-top: 16px;
+    text-align: center;
+}

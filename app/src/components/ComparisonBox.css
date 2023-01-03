@@ -1,0 +1,12 @@
+.comparison-box {
+    background-color: var(--default-color-text);
+    flex-basis: 40%;
+    padding: 16px 32px 16px 32px;
+    min-width: 256px;
+}
+
+@media screen and (max-width: 1200px) {
+    .comparison-box {
+        min-height: 256px;
+    }
+}

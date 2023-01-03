@@ -1,0 +1,67 @@
+@import "../App.css";
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    border-style: solid;
+    border-color: var(--default-color-border);
+    border-width: 0px 0px 2px 0px;
+}
+
+.header-title {
+    font-size: 32px;
+    font-weight: 900;
+    padding: 22px;
+    border-style: solid;
+    border-color: var(--default-color-border);
+    border-width: 0px 2px 0px 0px;
+    letter-spacing: 2px;
+    color: var(--default-color-text);
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-shrink: 0;
+    justify-content: space-evenly;
+    padding: 22px;
+    border-style: solid;
+    border-color: var(--default-color-border);
+    border-width: 0px 0px 0px 2px;
+    width: 464px;
+}
+
+.header-nav-link {
+    font-size: 24px;
+    letter-spacing: 1px;
+    color: var(--default-color-text);
+
+}
+
+.header-nav-link:link,
+.header-nav-link:visited {
+    text-decoration: none;
+}
+
+.header-nav-link:hover {
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 835px) {
+    header {
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: stretch;
+    }
+
+    .header-title {
+        border-width: 0px 1px 1px 1px;
+    }
+
+    .header-nav {
+        border-width: 0px;
+    }
+}
