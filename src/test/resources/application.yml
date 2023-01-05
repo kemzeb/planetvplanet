@@ -8,4 +8,4 @@ spring:
     hibernate:
       ddl-auto: create-drop
     generate-ddl: true
-    show-sql: true
+    show-sql: false
