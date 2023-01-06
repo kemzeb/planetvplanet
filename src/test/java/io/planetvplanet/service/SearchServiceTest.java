@@ -82,31 +82,31 @@ class SearchServiceTest {
   }
 
   @Test
-  void getPlanetByID_givenIDAndEmptyRepo_returnEmptyOptional() {
+  void getPlanetByFullName_givenNameAndEmptyRepo_returnEmptyOptional() {
     // Given
-    UUID id = UUID.randomUUID();
-    when(planetRepository.findById(id)).thenReturn(Optional.empty());
+    String planetName = "Daxx";
 
     // When
-    Optional<Planet> result = underTest.getPlanet(id);
+    when(planetRepository.findById(planetName)).thenReturn(Optional.empty());
+    Optional<Planet> result = underTest.getPlanetByFullName(planetName);
 
     // Then
-    verify(planetRepository).findById(id);
+    verify(planetRepository).findById(planetName);
     assertThat(result).isEmpty();
   }
 
   @Test
-  void getPlanetByID_givenIDAndNonEmptyRepo_returnNonEmptyOptional() {
+  void getPlanetByFullName_givenNameAndNonEmptyRepo_returnNonEmptyOptional() {
     // Given
     Planet planet = new Planet();
-    UUID id = planet.getPlanetID();
-    when(planetRepository.findById(id)).thenReturn(Optional.of(planet));
+    String planetName = planet.getPlanetName();
 
     // When
-    Optional<Planet> result = underTest.getPlanet(id);
+    when(planetRepository.findById(planetName)).thenReturn(Optional.of(planet));
+    Optional<Planet> result = underTest.getPlanetByFullName(planetName);
 
     // Then
-    verify(planetRepository).findById(id);
+    verify(planetRepository).findById(planetName);
     assertThat(result).isPresent();
   }
 

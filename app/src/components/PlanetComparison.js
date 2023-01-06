@@ -16,6 +16,4 @@ function PlanetComparison() {
     );
 }
 
-
-
 export default PlanetComparison;

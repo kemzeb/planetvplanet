@@ -1,14 +1,11 @@
 package io.planetvplanet.model;
 
-import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import org.hibernate.annotations.Type;
 
 @Entity
 public class Planet {
-  @Id @Type(type = "org.hibernate.type.UUIDCharType") private UUID planetID;
-  private String planetName;
+  @Id private String planetName;
   private String hostName;
   private String discoveryYear;
   private String discoveryFacility;
@@ -28,7 +25,6 @@ public class Planet {
       String discoveryMethod, Float orbitalPeriodDays, Float planetEarthMass,
       Float planetEarthRadius, boolean isExoplanet, Float systemDistanceInParsecs,
       Integer systemNumStars, Integer systemNumPlanets) {
-    this.planetID = UUID.randomUUID();
     this.planetName = planetName;
     this.hostName = hostName;
     this.discoveryYear = discoveryYear;
@@ -46,10 +42,6 @@ public class Planet {
   public String toString() {
     return String.format("Planet: %s, Host: %s, Discovery Year: %s", this.planetName, this.hostName,
         this.discoveryYear);
-  }
-
-  public UUID getPlanetID() {
-    return planetID;
   }
 
   public String getPlanetName() {

@@ -6,7 +6,6 @@ import io.planetvplanet.repository.PlanetRepository;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
-import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -31,16 +30,15 @@ public class SearchService implements ISearchService {
       // If any planets were found, create its corresponding DTO object.
       for (Planet planet :
           planetRepository.search(input, isExoplanet, PageRequest.ofSize(limitSize))) {
-        resultCollection.add(new SearchPlanetResult(
-            planet.getPlanetID(), planet.getPlanetName(), planet.getHostName()));
+        resultCollection.add(new SearchPlanetResult(planet.getPlanetName(), planet.getHostName()));
       }
     }
     return resultCollection;
   }
 
   @Override
-  public Optional<Planet> getPlanet(UUID id) {
-    return planetRepository.findById(id);
+  public Optional<Planet> getPlanetByFullName(String planetName) {
+    return planetRepository.findById(planetName);
   }
 
   /**

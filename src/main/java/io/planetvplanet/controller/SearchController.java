@@ -6,7 +6,6 @@ import io.planetvplanet.service.ISearchService;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Random;
-import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,9 +28,9 @@ public class SearchController {
     return searchService.getPlanetsByNameSubstring(name, exoplanetFlag);
   }
 
-  @GetMapping(value = "/{id}")
-  public ResponseEntity<Planet> searchForPlanetByID(@PathVariable UUID id) {
-    Optional<Planet> planetOptional = searchService.getPlanet(id);
+  @GetMapping(value = "/{planetName}")
+  public ResponseEntity<Planet> searchForPlanetByFullName(@PathVariable String planetName) {
+    Optional<Planet> planetOptional = searchService.getPlanetByFullName(planetName);
 
     return planetOptional.isPresent() ? ResponseEntity.ok().body(planetOptional.get())
                                       : ResponseEntity.ok().build();

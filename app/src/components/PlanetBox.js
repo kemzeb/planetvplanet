@@ -39,7 +39,7 @@ function PlanetBox({ isExoplanetComponent, searchResult, onSearchResultChange })
 
         if (searchSuggestion) {
             // Fetch the requested planet.
-            fetch(URL + `/planets/${searchSuggestion.id}`)
+            fetch(URL + `/planets/${searchSuggestion.planetName}`)
                 .then(response => response.json())
                 .then(data => handleSearchResultChange(data))
                 .catch(error => console.log(error))
@@ -89,7 +89,7 @@ function PlanetBox({ isExoplanetComponent, searchResult, onSearchResultChange })
                 <form onSubmit={handleSearchSubmit}>
                     <input className="search-box" type="search" list={listName} onChange={event => handleSearchSuggestions(event)} name="query"></input>
                     <datalist id={listName}>
-                        {newSearchSuggestions.map(planet => (<option key={planet.id}>{planet.planetName}</option>))}
+                        {newSearchSuggestions.map((planet, idx) => (<option key={idx}>{planet.planetName}</option>))}
                     </datalist>
                     <input className="submit-button" type="submit" value="Submit"></input>
                 </form>

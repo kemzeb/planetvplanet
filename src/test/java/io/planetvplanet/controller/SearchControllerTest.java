@@ -8,7 +8,6 @@ import static org.mockito.Mockito.when;
 import io.planetvplanet.model.Planet;
 import io.planetvplanet.service.ISearchService;
 import java.util.Optional;
-import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -29,8 +28,8 @@ public class SearchControllerTest {
     ResponseEntity<Planet> response = null;
 
     // When
-    when(searchService.getPlanet(any(UUID.class))).thenReturn(Optional.empty());
-    response = underTest.searchForPlanetByID(UUID.randomUUID());
+    when(searchService.getPlanetByFullName(any(String.class))).thenReturn(Optional.empty());
+    response = underTest.searchForPlanetByFullName(new String());
 
     // Then
     assertThat(response).isNotNull();
@@ -46,8 +45,8 @@ public class SearchControllerTest {
         new Planet("Kerwan", null, null, null, null, null, null, null, false, null, null, null);
 
     // When
-    when(searchService.getPlanet(any(UUID.class))).thenReturn(Optional.of(planet));
-    response = underTest.searchForPlanetByID(UUID.randomUUID());
+    when(searchService.getPlanetByFullName(any(String.class))).thenReturn(Optional.of(planet));
+    response = underTest.searchForPlanetByFullName(new String());
 
     // Then
     assertThat(response).isNotNull();
