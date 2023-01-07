@@ -24,12 +24,12 @@ your web browser.
 1. Fire up a local MySQL server (either with Docker or by downloading it from its official website and running it).
     * If prompted for a username/password, type "root"
     * Assuming you are in a terminal session communicating to a MySQL server, create a database called "planet_data" using the following command: `create database planet_data;`
-2. Assuming your in the root directory of this project, build the JAR file using Maven and run:
+2. Assuming you're in the root directory of this project, build the JAR file using Maven and run:
     ```
-    ./mvnw package
+    ./mvnw package -Dmaven.test.skip
     java -jar target/planetvplanet-0.0.1-SNAPSHOT.jar
     ```
-3. Assuming your are in the `app` directory, start the web frontend using `npm start`
+3. Assuming you're in the `app` directory, install frontend dependencies using `npm install` and start it using `npm start`.
 
 After following these steps, you should be able to interact with this app!
 
