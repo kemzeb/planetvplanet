@@ -3,8 +3,9 @@ package io.planetvplanet.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
-import io.planetvplanet.dto.SearchPlanetResult;
+import io.planetvplanet.dto.PlanetSearchSuggestion;
 import io.planetvplanet.model.Planet;
+import io.planetvplanet.model.StarSystem;
 import io.planetvplanet.repository.PlanetRepository;
 import java.util.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -60,22 +61,20 @@ class SearchServiceTest {
     String input = "ar";
     String planetName = "Aridia";
     String hostName = "Solana I";
-    Planet planet = new Planet();
-
-    planet.setPlanetName(planetName);
-    planet.setHostName(hostName);
-    when(planetRepository.search(eq(input), eq(false), any()))
-        .thenReturn(new ArrayList<>(List.of(planet)));
+    StarSystem system = new StarSystem(hostName, 0.0F, 0, 0);
+    Planet planet = new Planet(planetName, system, null, null, null, null, null, null, false);
 
     // When
-    Collection<SearchPlanetResult> planetCollection =
+    when(planetRepository.search(eq(input), eq(false), any()))
+        .thenReturn(new ArrayList<>(List.of(planet)));
+    Collection<PlanetSearchSuggestion> planetCollection =
         underTest.getPlanetsByNameSubstring(input, false);
 
     // Then
     verify(planetRepository).search(eq(input), eq(false), any());
     assertThat(planetCollection).isNotNull();
 
-    SearchPlanetResult result = planetCollection.iterator().next();
+    PlanetSearchSuggestion result = planetCollection.iterator().next();
     assertThat(result).isNotNull();
     assertThat(result.getPlanetName()).isEqualTo(planetName);
     assertThat(result.getHostName()).isEqualTo(hostName);

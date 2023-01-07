@@ -3,6 +3,7 @@ package io.planetvplanet.repository;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import io.planetvplanet.model.Planet;
+import io.planetvplanet.model.StarSystem;
 import java.util.Collection;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -37,8 +38,7 @@ class PlanetRepositoryTest {
   void findByPlanetNameIgnoreCaseContaining_onNonEmptyRepository_returnsNonEmptyCollection() {
     // Given
     String input = "Novalis";
-    Planet planet =
-        new Planet(input, null, null, null, null, null, null, null, false, null, null, null);
+    Planet planet = new Planet(input, null, null, null, null, null, null, null, false);
     underTest.save(planet);
 
     // When
@@ -64,8 +64,7 @@ class PlanetRepositoryTest {
     String input = "Pokitaru";
     int invalidPageIdx = 3;
     int pageSize = 1;
-    Planet planet =
-        new Planet(input, null, null, null, null, null, null, null, false, null, null, null);
+    Planet planet = new Planet(input, null, null, null, null, null, null, null, false);
     underTest.save(planet);
 
     // When

@@ -1,6 +1,6 @@
 package io.planetvplanet.controller;
 
-import io.planetvplanet.dto.SearchPlanetResult;
+import io.planetvplanet.dto.PlanetSearchSuggestion;
 import io.planetvplanet.model.Planet;
 import io.planetvplanet.service.ISearchService;
 import java.util.Collection;
@@ -23,7 +23,7 @@ public class SearchController {
   }
 
   @GetMapping()
-  public Collection<SearchPlanetResult> searchForPlanets(
+  public Collection<PlanetSearchSuggestion> searchForPlanets(
       @RequestParam String name, @RequestParam(isExoplanetQueryName) boolean exoplanetFlag) {
     return searchService.getPlanetsByNameSubstring(name, exoplanetFlag);
   }

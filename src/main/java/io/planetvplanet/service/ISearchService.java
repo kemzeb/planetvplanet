@@ -1,6 +1,6 @@
 package io.planetvplanet.service;
 
-import io.planetvplanet.dto.SearchPlanetResult;
+import io.planetvplanet.dto.PlanetSearchSuggestion;
 import io.planetvplanet.model.Planet;
 import java.util.Collection;
 import java.util.Optional;
@@ -13,7 +13,7 @@ public interface ISearchService {
    * @param isExoplanet: Search for exoplanets or planets of our Solar System.
    * @return Collection of SearchPlanetResult objects representing matching planet names.
    */
-  Collection<SearchPlanetResult> getPlanetsByNameSubstring(String input, boolean isExoplanet);
+  Collection<PlanetSearchSuggestion> getPlanetsByNameSubstring(String input, boolean isExoplanet);
 
   Optional<Planet> getPlanetByFullName(String planetName);
 

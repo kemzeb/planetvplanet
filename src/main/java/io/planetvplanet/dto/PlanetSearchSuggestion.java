@@ -5,11 +5,11 @@ package io.planetvplanet.dto;
  * to encapsulate much of the information of a Planet entity and have the
  * exposed information used within a response message.
  */
-public class SearchPlanetResult {
+public class PlanetSearchSuggestion {
   private String planetName;
   private String hostName;
 
-  public SearchPlanetResult(String planetName, String hostName) {
+  public PlanetSearchSuggestion(String planetName, String hostName) {
     this.planetName = planetName;
     this.hostName = hostName;
   }

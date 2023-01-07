@@ -1,6 +1,6 @@
 package io.planetvplanet.service;
 
-import io.planetvplanet.dto.SearchPlanetResult;
+import io.planetvplanet.dto.PlanetSearchSuggestion;
 import io.planetvplanet.model.Planet;
 import io.planetvplanet.repository.PlanetRepository;
 import java.util.ArrayList;
@@ -21,16 +21,17 @@ public class SearchService implements ISearchService {
   }
 
   @Override
-  public Collection<SearchPlanetResult> getPlanetsByNameSubstring(
+  public Collection<PlanetSearchSuggestion> getPlanetsByNameSubstring(
       String input, boolean isExoplanet) {
-    Collection<SearchPlanetResult> resultCollection = new ArrayList<>();
+    Collection<PlanetSearchSuggestion> resultCollection = new ArrayList<>();
     int limitSize = 10;
 
     if (input.length() >= 2) {
       // If any planets were found, create its corresponding DTO object.
       for (Planet planet :
           planetRepository.search(input, isExoplanet, PageRequest.ofSize(limitSize))) {
-        resultCollection.add(new SearchPlanetResult(planet.getPlanetName(), planet.getHostName()));
+        resultCollection.add(
+            new PlanetSearchSuggestion(planet.getPlanetName(), planet.getSystem().getHostName()));
       }
     }
     return resultCollection;

@@ -41,8 +41,7 @@ public class SearchControllerTest {
   void searchForPlanetByID_givenNonEmptyRepo_returnNonEmptyBody() {
     // Given
     ResponseEntity<Planet> response = null;
-    Planet planet =
-        new Planet("Kerwan", null, null, null, null, null, null, null, false, null, null, null);
+    Planet planet = new Planet("Kerwan", null, null, null, null, null, null, null, false);
 
     // When
     when(searchService.getPlanetByFullName(any(String.class))).thenReturn(Optional.of(planet));
@@ -73,8 +72,7 @@ public class SearchControllerTest {
   void getRandomPlanet_givenNonEmptyRepo_returnNonEmptyBody() {
     // Given
     ResponseEntity<Planet> response = null;
-    Planet planet =
-        new Planet("Tabora", null, null, null, null, null, null, null, false, null, null, null);
+    Planet planet = new Planet("Tabora", null, null, null, null, null, null, null, false);
 
     // When
     when(searchService.getRandomPlanet(anyBoolean())).thenReturn(Optional.of(planet));

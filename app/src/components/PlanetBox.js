@@ -68,16 +68,16 @@ function PlanetBox({ isExoplanetComponent, searchResult, onSearchResultChange })
             return (
                 <>
                     <h3>Planet {searchResult.planetName}</h3>
-                    <h5>Host Star: {searchResult.hostName}</h5>
-                    <article># of Stars: {searchResult.systemNumStars}</article>
-                    <article># of Planets: {searchResult.systemNumPlanets}</article>
+                    <h5>Host Star: {searchResult.system.hostName}</h5>
+                    <article># of Stars: {searchResult.system.numStars}</article>
+                    <article># of Planets: {searchResult.system.numPlanets}</article>
                     <article>Discovery Year: {searchResult.discoveryYear || noDataStr}</article>
                     <article>Discovery Method: {searchResult.discoveryMethod || noDataStr}</article>
                     <article>Discovery Facility: {searchResult.discoveryFacility || noDataStr}</article>
                     <article>Orbital Period Days: {searchResult.orbitalPeriodDays || noDataStr}</article>
                     <article>Mass (Earth Mass): {searchResult.planetEarthMass || noDataStr}</article>
                     <article>Radius (Earth Radius): {searchResult.planetEarthRadius || noDataStr}</article>
-                    {isExoplanetComponent === true && <article>System Distance (Parsecs): {searchResult.systemDistanceInParsecs || noDataStr}</article>}
+                    {isExoplanetComponent === true && <article>System Distance (Parsecs): {searchResult.system.distanceInParsecs || noDataStr}</article>}
                 </>
             );
         }

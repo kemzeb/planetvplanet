@@ -1,7 +1,9 @@
 package io.planetvplanet.helper;
 
 import io.planetvplanet.model.Planet;
+import io.planetvplanet.model.StarSystem;
 import io.planetvplanet.repository.PlanetRepository;
+import io.planetvplanet.repository.StarSystemRepository;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -17,7 +19,8 @@ public class CSVToDB {
    * @param filePath: file path to the planet data table
    * @return list of planet entities
    */
-  public static void convert(PlanetRepository repo, String filePath) throws IOException {
+  public static void convert(PlanetRepository planetRepo, StarSystemRepository sysRepo,
+      String filePath) throws IOException {
     Reader reader = new FileReader(filePath);
     CSVFormat csvFormatter = CSVFormat.DEFAULT.builder().setCommentMarker('#').setHeader().build();
     CSVParser csvParser = CSVParser.parse(reader, csvFormatter);
@@ -36,10 +39,12 @@ public class CSVToDB {
       Integer numStars = getIntFromCSVRecord("sy_snum", record);
       Integer numPlanets = getIntFromCSVRecord("sy_pnum", record);
 
-      Planet planet = new Planet(planetName, hostName, discoveryYear, discoveryFacility,
-          discoveryMethod, orbitalPeriodDays, earthMass, earthRadius, true, systemDistanceInParsecs,
-          numStars, numPlanets);
-      repo.save(planet);
+      StarSystem system = new StarSystem(hostName, systemDistanceInParsecs, numStars, numPlanets);
+      system = sysRepo.save(system);
+
+      Planet planet = new Planet(planetName, system, discoveryYear, discoveryFacility,
+          discoveryMethod, orbitalPeriodDays, earthMass, earthRadius, true);
+      planetRepo.save(planet);
     }
   }
 

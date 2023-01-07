@@ -56,10 +56,10 @@ function ComparisonBox({ planetResult, exoplanetResult }) {
             <div id="comparison-content">
                 <h4>Considering Planet {planetResult.planetName}...</h4>
                 <article># of Stars:{' '}
-                    {compareBySubtraction(planetResult.systemNumStars, exoplanetResult.systemNumStars)}
+                    {compareBySubtraction(planetResult.system.numStars, exoplanetResult.system.numStars)}
                 </article>
                 <article># of Planets:{' '}
-                    {compareBySubtraction(planetResult.systemNumPlanets, exoplanetResult.systemNumPlanets)}
+                    {compareBySubtraction(planetResult.system.numPlanets, exoplanetResult.system.numPlanets)}
                 </article>
                 <article>Mass (Earth Mass):{' '}
                     {compareByDivision(planetResult.planetEarthMass, exoplanetResult.planetEarthMass)}

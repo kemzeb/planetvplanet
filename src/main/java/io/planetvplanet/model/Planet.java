@@ -2,11 +2,13 @@ package io.planetvplanet.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Planet {
   @Id private String planetName;
-  private String hostName;
+  @ManyToOne @JoinColumn(name = "hostName") private StarSystem system;
   private String discoveryYear;
   private String discoveryFacility;
   private String discoveryMethod;
@@ -14,19 +16,14 @@ public class Planet {
   private Float planetEarthMass;
   private Float planetEarthRadius;
   private boolean isExoplanet;
-  // TODO: Introduce additional tables to the database to avoid unnecessary redundancy.
-  private Float systemDistanceInParsecs;
-  private Integer systemNumStars;
-  private Integer systemNumPlanets;
 
   public Planet() {}
 
-  public Planet(String planetName, String hostName, String discoveryYear, String discoveryFacility,
-      String discoveryMethod, Float orbitalPeriodDays, Float planetEarthMass,
-      Float planetEarthRadius, boolean isExoplanet, Float systemDistanceInParsecs,
-      Integer systemNumStars, Integer systemNumPlanets) {
+  public Planet(String planetName, StarSystem system, String discoveryYear,
+      String discoveryFacility, String discoveryMethod, Float orbitalPeriodDays,
+      Float planetEarthMass, Float planetEarthRadius, boolean isExoplanet) {
     this.planetName = planetName;
-    this.hostName = hostName;
+    this.system = system;
     this.discoveryYear = discoveryYear;
     this.discoveryFacility = discoveryFacility;
     this.discoveryMethod = discoveryMethod;
@@ -34,22 +31,20 @@ public class Planet {
     this.planetEarthMass = planetEarthMass;
     this.planetEarthRadius = planetEarthRadius;
     this.isExoplanet = isExoplanet;
-    this.systemDistanceInParsecs = systemDistanceInParsecs;
-    this.systemNumStars = systemNumStars;
-    this.systemNumPlanets = systemNumPlanets;
   }
+
   @Override
   public String toString() {
-    return String.format("Planet: %s, Host: %s, Discovery Year: %s", this.planetName, this.hostName,
-        this.discoveryYear);
+    return String.format(
+        "Planet: %s, Host: %s, Discovery Year: %s", this.planetName, this.discoveryYear);
   }
 
   public String getPlanetName() {
     return planetName;
   }
 
-  public String getHostName() {
-    return hostName;
+  public StarSystem getSystem() {
+    return system;
   }
 
   public String getDiscoveryYear() {
@@ -76,27 +71,11 @@ public class Planet {
     return planetEarthRadius;
   }
 
-  public Float getSystemDistanceInParsecs() {
-    return systemDistanceInParsecs;
-  }
-
-  public Integer getSystemNumStars() {
-    return systemNumStars;
-  }
-
-  public Integer getSystemNumPlanets() {
-    return systemNumPlanets;
-  }
-
   public boolean isExoplanet() {
     return isExoplanet;
   }
 
   public void setPlanetName(String planetName) {
     this.planetName = planetName;
-  }
-
-  public void setHostName(String hostName) {
-    this.hostName = hostName;
   }
 }
